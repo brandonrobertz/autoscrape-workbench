@@ -1,6 +1,6 @@
 {
   "name": "AutoScrape",
-  "id_name": "autoscrape-workbench",
+  "id_name": "autoscrape",
   "category" : "Scrape",
   "icon" : "scraper",
   "description" : "Crawl and submit search queries on interactive sites.",
