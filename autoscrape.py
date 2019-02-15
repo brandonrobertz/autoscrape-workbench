@@ -8,7 +8,7 @@ from server.modules.types import ProcessResult
 
 # in seconds
 POLL_FREQ = 2
-BASE_API = "http://autoscrape_flask:5000"
+BASE_API = "http://flask:5001"
 
 
 async def get_scraped_data(scrape_id):
@@ -17,8 +17,9 @@ async def get_scraped_data(scrape_id):
     data (base 64 encoded). Returns a DataFrame of the data
     and metadata.
     """
+    print("get_scraped_data", scrape_id)
     list_url = "%s/files/list/%s" % (BASE_API, scrape_id)
-    files_data = requests.get(list_url)
+    files_data = await requests.get(list_url)
 
     data = {
         "files": [],
@@ -27,7 +28,8 @@ async def get_scraped_data(scrape_id):
     for record in files_data["data"]:
         file_id = record["id"]
         file_url = "%s/files/data/%s/%s" % (BASE_API, scrape_id, file_id)
-        file_data = requests.get(file_url)
+        file_data = await requests.get(file_url)
+        print("file_id", file_id, "file_url", file_url)
         data["files"].append(file_data["data"]["data"])
         data["names"].append(file_data["data"]["name"])
 
@@ -42,26 +44,28 @@ async def start_scrape(params):
     print("start_scrape", params)
     start_url = "%s/start" % BASE_API
 
-    #response = requests.post(url, data=params)
-    #post_data = response.json()
-    #scrape_id = post_data["data"]
+    print("HTTP POST %s\n%s" % (start_url, params))
+    response = await requests.post(start_url, data=params)
+    post_data = response.json()
+    print("post_data", post_data)
+    scrape_id = post_data["data"]
+    print("scrape_id", scrape_id)
 
-    #while True:
-    #    print("Polling...")
-    #    status_url = "%s/status/%s" % (BASE_API, scrape_id)
-    #    status_data = requests.get(status_url).json()
+    while True:
+       print("Polling...")
+       status_url = "%s/status/%s" % (BASE_API, scrape_id)
+       status_data = await requests.get(status_url).json()
 
-    #    if status_data["status"] == "SUCCESSFUL":
-    #        break
-    #    elif status_data["status"] == "FAILURE":
-    #        break
-    #    elif status_data["status"] == "STARTED":
-    #        b64_screenshot = status_data["data"]
+       if status_data["status"] == "SUCCESSFUL":
+           break
+       elif status_data["status"] == "FAILURE":
+           break
+       elif status_data["status"] == "STARTED":
+           b64_screenshot = status_data["data"]
 
-    #    time.sleep(POLL_FREQ)
+       time.sleep(POLL_FREQ)
 
-    # df = await get_scraped_data(scrape_id)
-    return ProcessResult(dataframe={"a": [], "b": []})
+    return await get_scraped_data(scrape_id)
 
 
 async def fetch(params):
@@ -92,14 +96,12 @@ async def fetch(params):
     if not baseurl:
         return "You need to enter a starting URL to scrape"
 
-    return pd.DataFrame({"time": [1]}) #await start_scrape(urls, table)
+    return await start_scrape(data)
 
 
 def render(table, params, *, fetch_result, **kwargs):
-    # print("render", params)
     print("render params", params)
     print("render table", table)
-    # print("fetch_result", fetch_result)
     if params.get("baseurl"):
         return ProcessResult(table)
 

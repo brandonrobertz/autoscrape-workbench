@@ -147,6 +147,11 @@
       "id_name": "keep-filename",
       "type": "checkbox",
       "default": false
+    },
+    {
+      "name": "Scrape",
+      "id_name" : "version_select",
+      "type": "custom"
     }
   ]
 }
