@@ -36,6 +36,8 @@ async def fetch(params, *, get_input_dataframe):
     )
     crawl_data = ManualControlScraper(
         baseurl, **autoscrape_kwargs
-    )
+    ).run()
+    print("Got crawl_data", crawl_data)
     table = pd.DataFrame(crawl_data)
+    print("table", table)
     return table
