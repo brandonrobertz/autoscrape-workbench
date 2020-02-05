@@ -1,5 +1,5 @@
 name: AutoScrape
-id_name: autoscrape
+id_name: autoscrape-workbench
 category: Scrape
 icon: scraper
 description: Crawl and submit search queries on interactive sites.
