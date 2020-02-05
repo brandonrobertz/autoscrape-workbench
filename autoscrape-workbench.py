@@ -9,6 +9,7 @@ async def async_autoscrape(baseurl, **kwargs):
 
 
 async def fetch(params, *, get_input_dataframe):
+    print("AutoScrape Workbench called with parameters: %s" % (params))
     baseurl = params["baseurl"]
     autoscrape_kwargs = dict(
         backend="requests",
@@ -17,7 +18,7 @@ async def fetch(params, *, get_input_dataframe):
         input=None,
         save_graph=False,
         load_images=False,
-        maxdepth=None,
+        maxdepth=10,
         next_match=None,
         leave_host=False,
         show_browser=False,
