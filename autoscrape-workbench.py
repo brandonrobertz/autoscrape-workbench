@@ -34,7 +34,7 @@ async def fetch(params, *, get_input_dataframe):
         output=None,
         disable_style_saving=False,
     )
-    crawl_data = await async_autoscrape(
+    crawl_data = ManualControlScraper(
         baseurl, **autoscrape_kwargs
     )
     table = pd.DataFrame(crawl_data)
