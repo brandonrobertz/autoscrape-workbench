@@ -11,6 +11,7 @@ async def async_autoscrape(baseurl, **kwargs):
 async def fetch(params, *, get_input_dataframe):
     baseurl = params["baseurl"]
     autoscrape_kwargs = dict(
+        backend="requests",
         return_data=True,
         form_submit_wait=5,
         input=None,
