@@ -33,7 +33,7 @@ async def fetch(params, *, get_input_dataframe):
         loglevel="DEBUG",
         output=None,
         disable_style_saving=False,
-        stdout=False,
+        stdout=True,
     )
 
     crawl_data = ManualControlScraper(
