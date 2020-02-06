@@ -40,4 +40,4 @@ async def fetch(params, *, get_input_dataframe):
         baseurl, **autoscrape_kwargs
     ).run()
 
-    return pd.DataFrame(crawl_data)
+    return pd.DataFrame(crawl_data), None
