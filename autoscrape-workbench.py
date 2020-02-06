@@ -40,23 +40,4 @@ async def fetch(params, *, get_input_dataframe):
         baseurl, **autoscrape_kwargs
     ).run()
 
-    table = pd.DataFrame(
-        {
-            # TODO use response date, not current date
-            # TODO migrate to use timestamp type, not text (will affect
-            # existing users)
-            "status": "",
-            "url": "",
-            "html": "",
-            "css": "",
-            "date": datetime.utcnow().isoformat(timespec="seconds") + "Z",
-        }
-    )
-    for row in range(len(crawl_data)):
-        table.loc[row, "status"] = "OK"
-        table.loc[row, "url"] = crawl_data[row]["url"]
-        table.loc[row, "html"] = crawl_data[row]["html"]
-        table.loc[row, "css"] = crawl_data[row]["css"]
-        table.loc[row, "date"] = crawl_data[row]["date"]
-
-    return table
+    return pd.DataFrame(crawl_data)
