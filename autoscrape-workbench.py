@@ -1,4 +1,5 @@
 import asyncio
+from datetime import datetime
 
 from autoscrape import ManualControlScraper
 import pandas as pd
@@ -32,6 +33,7 @@ async def fetch(params, *, get_input_dataframe):
         loglevel="DEBUG",
         output=None,
         disable_style_saving=False,
+        stdout=False,
     )
 
     crawl_data = ManualControlScraper(
@@ -47,7 +49,7 @@ async def fetch(params, *, get_input_dataframe):
             "url": "",
             "html": "",
             "css": "",
-            "date": utcnow().isoformat(timespec="seconds") + "Z",
+            "date": datetime.utcnow().isoformat(timespec="seconds") + "Z",
         }
     )
     for row in range(len(crawl_data)):
