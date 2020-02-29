@@ -10,46 +10,14 @@ parameters:
   placeholder: Enter URL...
   id_name: baseurl
   type: string
-- name: Advanced crawl options
-  id_name: advanced-crawl
-  type: checkbox
-  default: false
-- name: Maximum crawl depth
-  id_name: maxdepth
-  type: integer
-  default: 10
-  visible_if:
-    id_name: advanced-crawl
-    value: true
-- name: Leave beginning URL host?
-  id_name: leave-host
-  type: checkbox
-  default: false
-  visible_if:
-    id_name: advanced-crawl
-    value: true
-- name: Link priority by text
-  placeholder: Separated by |, ex. "data|next"...
-  id_name: link-priority
-  type: string
-  visible_if:
-    id_name: advanced-crawl
-    value: true
-- name: Ignored links by text
-  placeholder: Separated by |, ex. "logout|quit"...
-  id_name: ignore-links
-  type: string
-  visible_if:
-    id_name: advanced-crawl
-    value: true
 - name: Submit queries and crawl results
   id_name: interact
   type: checkbox
   default: false
-- name: Form text match
+- name: How to find form
   id_name: form-match
   type: string
-  placeholder: Text found in search form...
+  placeholder: Unique text inside form...
   visible_if:
     id_name: interact
     value: true
@@ -66,7 +34,7 @@ parameters:
   visible_if:
     id_name: interact
     value: true
-- name: Maximum results pages to crawl per query, where 0 is no limit.
+- name: Max results pages
   id_name: formdepth
   type: integer
   default: 10
@@ -95,10 +63,38 @@ parameters:
   visible_if:
     id_name: interact
     value: true
-- name: Keep original page filenames
-  id_name: keep-filename
-  type: checkbox
-  default: false
 - name: Scrape
   id_name: version_select
   type: custom
+- name: Advanced crawl options
+  id_name: advanced-crawl
+  type: checkbox
+  default: false
+- name: Maximum crawl depth
+  id_name: maxdepth
+  type: integer
+  default: 10
+  visible_if:
+    id_name: advanced-crawl
+    value: true
+- name: Leave host?
+  id_name: leave-host
+  type: checkbox
+  default: false
+  visible_if:
+    id_name: advanced-crawl
+    value: true
+- name: Link priority by text
+  placeholder: Separated by comma...
+  id_name: link-priority
+  type: string
+  visible_if:
+    id_name: advanced-crawl
+    value: true
+- name: Ignored links by text
+  placeholder: Separated by comma...
+  id_name: ignore-links
+  type: string
+  visible_if:
+    id_name: advanced-crawl
+    value: true
