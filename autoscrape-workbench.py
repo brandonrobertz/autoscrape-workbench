@@ -1,5 +1,6 @@
 import asyncio
 from datetime import datetime
+import re
 
 from autoscrape import ManualControlScraper
 import pandas as pd
@@ -22,11 +23,11 @@ async def fetch(params, *, get_input_dataframe):
         next_match=params.get("next-match", "next"),
         leave_host=False,
         show_browser=False,
+        max_pages=25,
         driver="Firefox",
         form_submit_natural_click=params.get("form-submit-natural-click"),
         formdepth=params.get("formdepth", 10),
         link_priority=params.get("link-priority"),
-        keep_filename=False,
         ignore_links=params.get("ignore-links"),
         form_match=params.get("form-match"),
         save_screenshots=True,
@@ -40,4 +41,15 @@ async def fetch(params, *, get_input_dataframe):
         baseurl, **autoscrape_kwargs
     ).run()
 
-    return pd.DataFrame(crawl_data), None
+    html_only = []
+    for data in crawl_data:
+        css = data.get("css")
+        html = data.get("html")
+        fileclass = data.pop("fileclass", None)
+        if fileclass == "downloads":
+            continue
+        if not re.findall('<\s*html', html, re.IGNORECASE):
+            continue
+        html_only.append(data)
+
+    return pd.DataFrame(html_only), None
