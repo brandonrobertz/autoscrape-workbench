@@ -49,13 +49,6 @@ parameters:
   visible_if:
     id_name: interact
     value: true
-- name: Simulate real click.
-  id_name: form-submit-natural-click
-  type: checkbox
-  default: false
-  visible_if:
-    id_name: interact
-    value: true
 - name: Force a post-submit wait.
   id_name: form-submit-wait
   type: integer
@@ -84,9 +77,9 @@ parameters:
   visible_if:
     id_name: advanced-crawl
     value: true
-- name: Link priority by text
+- name: Link text whitelist
   placeholder: Separated by comma...
-  id_name: link-priority
+  id_name: only-links
   type: string
   visible_if:
     id_name: advanced-crawl

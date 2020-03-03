@@ -27,7 +27,7 @@ async def fetch(params, *, get_input_dataframe):
         driver="Firefox",
         form_submit_natural_click=params.get("form-submit-natural-click"),
         formdepth=params.get("formdepth", 10),
-        link_priority=params.get("link-priority"),
+        only_links=params.get("only-links"),
         ignore_links=params.get("ignore-links"),
         form_match=params.get("form-match"),
         save_screenshots=True,
