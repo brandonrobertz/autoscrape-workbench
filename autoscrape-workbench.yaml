@@ -10,84 +10,30 @@ parameters:
   placeholder: Enter URL...
   id_name: baseurl
   type: string
-- name: Submit queries and crawl results
-  id_name: interact
-  type: checkbox
-  default: false
-- name: How to find form
+- name: Form label
   id_name: form-match
   type: string
-  placeholder: Unique text inside form...
-  visible_if:
-    id_name: interact
-    value: true
-- name: Form input plan
+  placeholder: Unique title, E.g. 'Enter first name'
+- name: Form type and input
   id_name: input
   type: string
-  visible_if:
-    id_name: interact
-    value: true
-- name: Form 'next' button text match
+  placeholder: E.g., 'i:0:Jane Doe'
+- name: Text of button to go to next page
   id_name: next-match
-  placeholder: '''Next'' button text, ex. "Next→"...'
+  placeholder: E.g., 'Next' or 'Next Page'
   type: string
-  visible_if:
-    id_name: interact
-    value: true
 - name: Max results pages
   id_name: formdepth
   type: integer
   default: 10
-  visible_if:
-    id_name: interact
-    value: true
-- name: Advanced search query submit options. Setting any of these will slow your
-    scrape down, so use them only when AutoScrape fails to get to results pages using
-    default settings.
-  id_name: no-param-text1
-  type: statictext
-  visible_if:
-    id_name: interact
-    value: true
-- name: Force a post-submit wait.
-  id_name: form-submit-wait
-  type: integer
-  placeholder: Number of seconds...
-  visible_if:
-    id_name: interact
-    value: true
-- name: Scrape
-  id_name: version_select
-  type: custom
-- name: Advanced crawl options
-  id_name: advanced-crawl
-  type: checkbox
-  default: false
 - name: Maximum crawl depth
   id_name: maxdepth
   type: integer
   default: 10
-  visible_if:
-    id_name: advanced-crawl
-    value: true
 - name: Leave host?
   id_name: leave-host
   type: checkbox
   default: false
-  visible_if:
-    id_name: advanced-crawl
-    value: true
-- name: Link text whitelist
-  placeholder: Separated by comma...
-  id_name: only-links
-  type: string
-  visible_if:
-    id_name: advanced-crawl
-    value: true
-- name: Ignored links by text
-  placeholder: Separated by comma...
-  id_name: ignore-links
-  type: string
-  visible_if:
-    id_name: advanced-crawl
-    value: true
+- name: Scrape
+  id_name: version_select
+  type: custom
