@@ -22,14 +22,6 @@ parameters:
   id_name: next-match
   placeholder: E.g., 'Next' or 'Next Page'
   type: string
-- name: Max results pages
-  id_name: formdepth
-  type: integer
-  default: 10
-- name: Maximum crawl depth
-  id_name: maxdepth
-  type: integer
-  default: 10
 - name: Leave host?
   id_name: leave-host
   type: checkbox
